@@ -12,8 +12,8 @@ using QuanLyBanHang.Data;
 namespace QuanLyBanHang.Migrations
 {
     [DbContext(typeof(QLBHDbContext))]
-    [Migration("20260319070914_QLBH_GD6")]
-    partial class QLBH_GD6
+    [Migration("20260205065425_ThemCotHinhAnh")]
+    partial class ThemCotHinhAnh
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,6 +192,9 @@ namespace QuanLyBanHang.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LoaiSanPhamID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LoaiSanXuatID")
                         .HasColumnType("int");
 
                     b.Property<string>("Mota")

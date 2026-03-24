@@ -236,7 +236,7 @@
             lblLienKet.IsLink = true;
             lblLienKet.Name = "lblLienKet";
             lblLienKet.Size = new Size(77, 20);
-            lblLienKet.Text = "©2024 FIT";
+            lblLienKet.Text = "©2026 FIT";
             lblLienKet.Click += lblLienKet_Click;
             // 
             // FrmMain

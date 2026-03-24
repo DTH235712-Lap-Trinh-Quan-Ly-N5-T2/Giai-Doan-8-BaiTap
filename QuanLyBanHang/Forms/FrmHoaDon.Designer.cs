@@ -70,7 +70,6 @@
             dgvHoaDon.Columns.AddRange(new DataGridViewColumn[] { cotID, HoVaTenNhanVien, HoVaTenKhachHang, NgayLap, TongTienHoaDon, XemChiTiet });
             dgvHoaDon.Dock = DockStyle.Fill;
             dgvHoaDon.Location = new Point(3, 23);
-            dgvHoaDon.MultiSelect = false;
             dgvHoaDon.Name = "dgvHoaDon";
             dgvHoaDon.ReadOnly = true;
             dgvHoaDon.RowHeadersWidth = 51;

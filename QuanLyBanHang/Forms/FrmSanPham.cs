@@ -119,12 +119,30 @@ namespace QuanLyBanHang.Forms
 
         private void dgvSanPham_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvSanPham.Columns[e.ColumnIndex].Name == "HinhAnh")
+            if (dgvSanPham.Columns[e.ColumnIndex].Name == "HinhAnh" && e.Value != null)
             {
-                Image image = Image.FromFile(Path.Combine(imagesFolder, e.Value.ToString()));
-                image = new Bitmap(image, 24, 24);
+                try
+                {
+                    string fullPath = Path.Combine(imagesFolder, e.Value.ToString());
 
-                e.Value = image;
+                    // Kiểm tra xem file có tồn tại trên ổ đĩa không
+                    if (File.Exists(fullPath))
+                    {
+                        using (Image image = Image.FromFile(fullPath))
+                        {
+                            e.Value = new Bitmap(image, 24, 24);
+                        }
+                    }
+                    else
+                    {
+                        // Nếu không thấy file, có thể gán một ảnh mặc định hoặc để trống
+                        e.Value = null;
+                    }
+                }
+                catch
+                {
+                    e.Value = null; // Tránh crash nếu file ảnh bị lỗi định dạng
+                }
             }
         }
 
@@ -280,7 +298,7 @@ namespace QuanLyBanHang.Forms
                 string ext = Path.GetExtension(openFileDialog.FileName);
 
                 // Tạo tên file dự kiến sẽ lưu
-                string newFileName = StringExtensions.GenerateSlug(fileName) + ext;
+                string newFileName = fileName.GenerateSlug() + ext;
                 string fileSavePath = Path.Combine(imagesFolder, newFileName);
 
                 // 2. Nếu file đã tồn tại thì BÁO LỖI và DỪNG LẠI

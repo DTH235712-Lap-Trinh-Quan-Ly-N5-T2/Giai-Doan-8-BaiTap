@@ -293,21 +293,35 @@ namespace QuanLyBanHang.Forms
 
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {
-            // Kiểm tra xem người dùng đã chọn dòng nào trên DataGridView chưa
+            //// Kiểm tra xem người dùng đã chọn dòng nào trên DataGridView chưa
+            //if (dgvHoaDon.CurrentRow != null)
+            //{
+            //    // Khởi tạo đối tượng in
+            //    PrintDocument pdHoaDon = new PrintDocument();
+            //    // Gắn sự kiện vẽ giao diện hóa đơn
+            //    pdHoaDon.PrintPage += new PrintPageEventHandler(pdHoaDon_PrintPage);
+
+            //    // Khởi tạo hộp thoại xem trước bản in (Print Preview)
+            //    PrintPreviewDialog previewDialog = new PrintPreviewDialog();
+            //    previewDialog.Document = pdHoaDon;
+
+            //    // Mở hộp thoại xem trước ở chế độ toàn màn hình cho dễ nhìn
+            //    ((Form)previewDialog).WindowState = FormWindowState.Maximized;
+            //    previewDialog.ShowDialog();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Vui lòng chọn một hóa đơn để in.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
             if (dgvHoaDon.CurrentRow != null)
             {
-                // Khởi tạo đối tượng in
-                PrintDocument pdHoaDon = new PrintDocument();
-                // Gắn sự kiện vẽ giao diện hóa đơn
-                pdHoaDon.PrintPage += new PrintPageEventHandler(pdHoaDon_PrintPage);
+                // Nhớ dùng đúng cột "cotID" của bạn nhé
+                int maHoaDon = Convert.ToInt32(dgvHoaDon.CurrentRow.Cells["cotID"].Value.ToString());
 
-                // Khởi tạo hộp thoại xem trước bản in (Print Preview)
-                PrintPreviewDialog previewDialog = new PrintPreviewDialog();
-                previewDialog.Document = pdHoaDon;
-
-                // Mở hộp thoại xem trước ở chế độ toàn màn hình cho dễ nhìn
-                ((Form)previewDialog).WindowState = FormWindowState.Maximized;
-                previewDialog.ShowDialog();
+                using (Reports.FrmInHoaDon inHoaDon = new Reports.FrmInHoaDon(maHoaDon))
+                {
+                    inHoaDon.ShowDialog();
+                }
             }
             else
             {
@@ -341,7 +355,7 @@ namespace QuanLyBanHang.Forms
                 int margin = 20; // Lề trái
 
                 // --- PHẦN HEADER (Thông tin cửa hàng) ---
-                g.DrawString("CỬA HÀNG THIẾT BỊ IT VÕ VĂN TỶ", fontHeader, brush, margin, y);
+                g.DrawString("CỬA HÀNG THIẾT BỊ IT TRẦN TRÍ NHÂN", fontHeader, brush, margin, y);
                 y += 25;
                 g.DrawString("Địa chỉ: Đại học An Giang, TP. Long Xuyên", fontBody, brush, margin, y);
                 y += 40;
